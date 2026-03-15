@@ -18,62 +18,6 @@ The frontend is a React dApp that connects to MetaMask, reads from and writes to
 📦 Hand-rolled contracts — no OpenZeppelin inheritance
 
 
-🏗️ Architecture
-User (Browser)
-    │
-    ├── MetaMask Wallet  ←──────────────────────────────────┐
-    │                                                        │
-    └── React Frontend (App.js + Web3.js)                   │
-             │                                              │
-             ├── Reads KryptoBird.json (ABI + Address)      │
-             │                                              │
-             └── Ethereum Network (Ganache / Mainnet)       │
-                      │                                     │
-                      └── KryptoBird.sol (ERC-721) ─────────┘
-Contract Inheritance Chain
-IERC165   IERC721   IERC721Emuerable   IERC721MetaData
-   │          │             │                  │
-   └──────────┴─────────────┴──────────────────┘
-                       implements
-                           │
-          ERC165  ERC721  ERC721Eumerable  ERC721MetaData
-                       inherits
-                           │
-                   ERC721Connector
-                       extends
-                           │
-                  ⭐ KryptoBird.sol
-Project Structure
-nft-marketplace/
-├── src/
-│   ├── abis/                        # Compiled ABI + deployed addresses
-│   │   └── KryptoBird.json
-│   ├── components/
-│   │   ├── App.js                   # Main React dApp component
-│   │   └── App.css
-│   ├── contracts/
-│   │   ├── KryptoBird.sol           # ⭐ Main NFT contract
-│   │   ├── ERC721Connector.sol      # Composition bridge
-│   │   ├── ERC721Eumerable.sol      # Enumeration extension
-│   │   ├── ERC721MetaData.sol       # Name & symbol storage
-│   │   ├── ERC721.sol               # Core token logic
-│   │   ├── ERC165.sol               # Interface registry
-│   │   ├── Migrations.sol           # Truffle migrations helper
-│   │   └── interfaces/
-│   │       ├── IERC165.sol
-│   │       ├── IERC721.sol
-│   │       ├── IERC721Emuerable.sol
-│   │       └── IERC721MetaData.sol
-│   ├── index.js                     # React entry point
-│   └── serviceWorker.js
-├── migrations/
-│   ├── 1_initial_migration.js
-│   └── 2_deploy_contracts.js
-├── test/
-│   └── KryptoBird.test.js
-├── truffle-config.js
-└── package.json
-
 🚀 Getting Started
 Prerequisites
 ToolVersionPurposeNode.js≥ 12.xJavaScript runtimenpm≥ 6.xPackage managerGanache2.xLocal Ethereum blockchainMetaMaskLatestBrowser walletTruffle5.0.5Contract framework
